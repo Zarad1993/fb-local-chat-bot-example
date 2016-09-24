@@ -1,10 +1,10 @@
-import 'babel-polyfill';
 import {expect} from 'chai';
-import Bot from '../../build';
-import makeServer from '../jokeChatServer';
+import Bot from 'fb-local-chat-bot';
+import makeServer from '../server';
 
 function userSendMessage(senderID, text) {
   Bot.emit(
+
     'text',
     {
       sender: {id: senderID},
