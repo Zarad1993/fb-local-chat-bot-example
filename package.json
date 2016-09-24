@@ -15,7 +15,8 @@
   },
   "scripts": {
     "test": "mocha ./app/test --compilers js:babel-register",
-    "lint": "eslint src --fix",
+    "lint": "eslint app --fix",
+    "start": "babel-node app",
     "dev": "nodemon --exec babel-node -- app"
   },
   "devDependencies": {
