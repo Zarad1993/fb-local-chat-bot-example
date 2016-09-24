@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "env": {
     // in CommonJS
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "extends": [
     "defaults/configurations/eslint",

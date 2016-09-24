@@ -1,10 +1,11 @@
-const Bot = require('../build');
+const Bot = require('../src');
 const express = require('express');
 const bodyParser = require('body-parser')
-const Promise = require('bluebird');
+const morgan = require('morgan')
+require('bluebird');
 
-const JOKE = "Did you know photons had mass? I didn't even know they were Catholic.";
-const RiddleImageUrl ="http://tinyurl.com/he9tsph";
+const JOKE = 'Did you know photons had mass? I didn\'t even know they were Catholic.';
+const RiddleImageUrl = 'http://tinyurl.com/he9tsph';
 const PostBackTypes = {
   TELL_JOKE: 'TELL_JOKE',
   TELL_ANOTHER_JOKE: 'TELL_ANOTHER_JOKE',
@@ -21,7 +22,11 @@ const JokeQuickReplies = [...Array(10).keys()].map(x => Bot.createQuickReply(`Jo
 
 function makeServer() {
   // initialize Bot and define event handlers
-  Bot.init('<TOKEN>', '<VERIFY_TOKEN>', true /*useLocalChat*/);
+  Bot.init(
+    process.env.FB_ACCESS_TOKEN,
+    process.env.FB_VERIFY_TOKEN,
+    process.env.USE_LOCAL_CHAT
+  );
 
   Bot.on('text', (event) => {
     const senderID = event.sender.id;
@@ -91,10 +96,19 @@ function makeServer() {
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
+  app.use(morgan('tiny'));
 
   app.use('/chat', Bot.router());
 
-  var server = app.listen(5000);
+  app.set('port', process.env.PORT|| 5000);
+
+  var server = app.listen(app.get('port'), function (err) {
+    if (err) {
+      console.log('error while starting server', err);
+    }
+
+    console.log(`Server is running: http://localhost:${app.get('port')}`);
+  });
   return server;
 }
 

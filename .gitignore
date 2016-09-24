@@ -41,3 +41,6 @@ jspm_packages
 
 #image files created locally
 public/images/board*.jpg
+
+# ENV files
+.env

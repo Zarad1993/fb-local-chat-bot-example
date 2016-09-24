@@ -4,9 +4,12 @@
   "main": "index.js",
   "description": "A ES6 Node client for Messenger Bot designed for easy local testing",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "dot": "1.0.3",
+    "dotenv": "^2.0.0",
     "express": "4.13.4",
     "invariant": "2.2.1",
+    "morgan": "^1.7.0",
     "request-promise": "3.0.0"
   },
   "scripts": {
@@ -18,7 +21,7 @@
     "test": "mocha ./build/test",
     "lint": "eslint src --fix",
     "check": "npm run lint && npm run flow && npm run test",
-    "joke": "node --harmony example/jokeChatApp.js",
+    "joke": "nodemon --exec babel-node -- example/jokeChatApp.js",
     "test_joke": "mocha ./example/test --compilers js:babel-register"
   },
   "devDependencies": {
