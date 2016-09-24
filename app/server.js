@@ -23,7 +23,11 @@ function makeServer() {
       console.log('error while starting server', err);
     }
 
-    console.log(`Server is running: http://localhost:${app.get('port')}`);
+    const host = `http://localhost:${app.get('port')}`;
+    console.log(`Server is running: ${host}`);
+    if (process.env.USE_LOCAL_CHAT) {
+      console.log(`Local chat is running here: ${host}/chat/localChat/`);
+    }
   });
   return server;
 }
