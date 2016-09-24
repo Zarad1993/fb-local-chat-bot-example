@@ -1,4 +1,4 @@
-# fb-local-chat-bot exmplae
+# fb-local-chat-bot example
 
 Simple example of usage https://github.com/spchuang/fb-local-chat-bot.
 
